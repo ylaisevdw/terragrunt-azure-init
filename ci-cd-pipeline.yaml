@@ -40,7 +40,7 @@ jobs:
         run: terragrunt init
         working-directory: variables/${{ matrix.environment }}
 
-      - name: Apply Terragrunt
+      - name: Terragrunt Plan
         run: terragrunt plan
         working-directory: variables/${{ matrix.environment }}
         env: ${{ secrets.AZURE_CREDENTIALS }}
