@@ -43,7 +43,6 @@ jobs:
       - name: Terragrunt Plan
         run: terragrunt plan
         working-directory: variables/${{ matrix.environment }}
-        # env: ${{ secrets.AZURE_CREDENTIALS }}
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
