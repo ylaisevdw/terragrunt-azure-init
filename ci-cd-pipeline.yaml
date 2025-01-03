@@ -25,10 +25,10 @@ jobs:
         with:
           terraform_version: 1.0.0
 
-      # - name: Azure Login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Install Terragrunt
         run: |
@@ -43,7 +43,7 @@ jobs:
       - name: Terragrunt Plan
         run: terragrunt plan
         working-directory: variables/${{ matrix.environment }}
-        env: ${{ secrets.AZURE_CREDENTIALS }}
+        # env: ${{ secrets.AZURE_CREDENTIALS }}
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
