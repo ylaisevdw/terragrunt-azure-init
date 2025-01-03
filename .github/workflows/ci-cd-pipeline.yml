@@ -1,0 +1,52 @@
+name: Terragrunt Pipeline To Deploy Storage Account
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terragrunt:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [dev, prod]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.0
+
+      # - name: Azure Login
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Terragrunt
+        run: |
+          curl -L -o terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.0/terragrunt_linux_amd64
+          chmod +x terragrunt
+          sudo mv terragrunt /usr/local/bin/
+
+      - name: Terragrunt Init
+        run: terragrunt init
+        working-directory: variables/${{ matrix.environment }}
+
+      - name: Apply Terragrunt
+        run: terragrunt plan
+        working-directory: variables/${{ matrix.environment }}
+        env: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # - name: Terragrunt Validate
+      #   run: terragrunt validate
+
+      # - name: Terragrunt Apply
+      #   run: terragrunt apply -auto-approve
