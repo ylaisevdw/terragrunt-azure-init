@@ -13,27 +13,23 @@ permissions:
   contents: read
 
 jobs:
-  terragrunt:
+  deploy-dev:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        environment: [dev]
+    environment: dev
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # - name: Checkout repository
+      #   uses: actions/checkout@v2
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.0.0
+      # - name: Set up Terraform
+      #   uses: hashicorp/setup-terraform@v2
+      #   with:
+      #     terraform_version: 1.0.0
 
       - name: Azure Login
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
 
 
       - name: Install Terragrunt
