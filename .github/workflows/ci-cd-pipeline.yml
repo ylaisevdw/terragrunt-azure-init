@@ -42,13 +42,13 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Terragrunt Init
-        run: terragrunt init
-        working-directory: variables/${{ matrix.environment }}
+      # - name: Terragrunt Init
+      #   run: terragrunt init
+      #   working-directory: variables/${{ matrix.environment }}
 
-      - name: Terragrunt Plan
-        run: terragrunt plan
-        working-directory: variables/${{ matrix.environment }}
+      # - name: Terragrunt Plan
+      #   run: terragrunt plan
+      #   working-directory: variables/${{ matrix.environment }}
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
