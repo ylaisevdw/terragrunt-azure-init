@@ -40,11 +40,11 @@ jobs:
 
       - name: Terragrunt Init
         run: terragrunt init
-        working-directory: variables/dev
+        working-directory: ${{ github.workspace }}/variables/dev
 
       - name: Terragrunt Plan
         run: terragrunt plan
-        working-directory: variables/dev
+        working-directory: ${{ github.workspace }}/variables/dev
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
