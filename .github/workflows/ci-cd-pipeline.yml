@@ -18,8 +18,10 @@ jobs:
     environment: dev
 
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: .
 
       # - name: Set up Terraform
       #   uses: hashicorp/setup-terraform@v2
@@ -38,14 +40,13 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Change Directory to Variables Dev
-        run: cd ${{ github.workspace }}/variables/dev
-
       - name: Terragrunt Init
         run: terragrunt init
+        working-directory: ${{ github.workspace }}/variables/dev
 
       - name: Terragrunt Plan
         run: terragrunt plan
+        working-directory: ${{ github.workspace }}/variables/dev
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
