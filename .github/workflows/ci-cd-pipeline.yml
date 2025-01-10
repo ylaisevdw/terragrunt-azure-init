@@ -38,13 +38,14 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
+      - name: Change Directory to Variables Dev
+        run: cd ${{ github.workspace }}/variables/dev
+
       - name: Terragrunt Init
         run: terragrunt init
-        working-directory: ${{ github.workspace }}/variables/dev
 
       - name: Terragrunt Plan
         run: terragrunt plan
-        working-directory: ${{ github.workspace }}/variables/dev
 
       # - name: Terragrunt Validate
       #   run: terragrunt validate
